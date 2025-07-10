@@ -1,0 +1,44 @@
+// Last updated: 7/11/2025, 12:11:02 AM
+class Solution {
+public:
+
+void solve(set < vector<int> > &final,vector<int>ans,int dif,int n,vector<int>arr,int i){
+    if(i>=n){
+        return;
+    }
+    if(dif<0){
+        return;
+    }
+    if(dif==0){
+        sort(ans.begin(),ans.end());
+        final.insert(ans);
+        return ;
+        
+    }
+    ans.push_back(arr[i]);
+    solve(final,ans,dif-arr[i],n,arr,i);
+    
+    ans.pop_back();
+
+    while (i + 1 < n && arr[i] == arr[i + 1]) {
+            i++;
+        }
+    
+    solve(final,ans,dif,n,arr,i+1);
+    
+    
+    
+}
+
+vector<vector<int>> combinationSum(vector<int>& arr, int dif) {
+       set<vector<int>>final;
+ vector<vector<int>>final2;
+ vector<int>ans; 
+ solve(final,ans,dif,arr.size(),arr,0);
+  
+  
+  for(auto it:final){
+      final2.push_back(it);
+  }
+  return final2;  
+}};
